@@ -7,11 +7,11 @@ class Solution:
     def deleteDuplicates(self, head):
         if not head:
             return
-        temp = head
-        while head.next:
-            if head.val == head.next.val:
-                head.next = head.next.next
+        curr = head
+        while curr.next:
+            if curr.val == curr.next.val:
+                curr.next = curr.next.next
             else:
-                head = head.next
-        return temp
+                curr = curr.next
+        return head
     
