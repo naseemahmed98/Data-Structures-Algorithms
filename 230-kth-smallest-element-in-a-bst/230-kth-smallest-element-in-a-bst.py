@@ -7,19 +7,19 @@
 
 class Solution(object):
     def kthSmallest(self, root, k):
-        stack = []
-        node = root
-        counter = 0
-        while True:
-            if node:
-                stack.append(node)
-                node = node.left 
-            else:
-                node = stack.pop()
-                counter += 1 
-                if counter == k:
-                    break
-                node = node.right
-        return node.val
+        self.counter = 0
+        def kth(node):
+            if not node:
+                return 
+            kth(node.left)
+            self.counter += 1
+            
+            if self.counter == k:
+                self.kth_Smallest = node.val
+            
+            kth(node.right)
+        kth(root)
+        return self.kth_Smallest
+
 
         
