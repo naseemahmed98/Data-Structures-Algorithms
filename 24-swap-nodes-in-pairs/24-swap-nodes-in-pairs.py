@@ -12,8 +12,9 @@ class Solution(object):
             nxtPair = curr.next.next
             second = curr.next
             
-            second.next = curr 
+          
             curr.next = nxtPair
+            second.next = curr
             prev.next = second 
             
             prev = curr
