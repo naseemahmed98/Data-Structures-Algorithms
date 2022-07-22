@@ -3,8 +3,8 @@ class Solution(object):
         boxTypes.sort(key = lambda x: -x[1])
         unitCounter = 0
         for x, y in boxTypes:
-            if truckSize == 0:
-                return unitCounter
+            #if truckSize == 0:
+             #   return unitCounter
             if truckSize >= x:
                 unitCounter += x * y
                 truckSize -= x
