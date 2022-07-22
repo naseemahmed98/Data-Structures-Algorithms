@@ -10,8 +10,10 @@ class Solution(object):
                 truckSize -= x
             elif truckSize < x:
                 unitCounter += (truckSize) * y
-                return unitCounter 
-        
+                truckSize = 0 
         return unitCounter
+        
+        
+        
             
         
