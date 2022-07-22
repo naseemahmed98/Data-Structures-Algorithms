@@ -13,8 +13,8 @@ class Solution(object):
             second = curr.next
             
           
-            curr.next = nxtPair
             prev.next = second
+            curr.next = nxtPair
             second.next = curr
             
             
