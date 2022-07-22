@@ -16,7 +16,7 @@ class Solution(object):
             curr.next = nxtPair
             prev.next = second
             second.next = curr
-            #prev.next = second 
+            
             
             prev = curr
             curr = curr.next 
