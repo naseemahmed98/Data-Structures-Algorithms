@@ -5,21 +5,20 @@
 #         self.next = next
 class Solution(object):
     def addTwoNumbers(self, l1, l2):
-        l1_digits = ""
-        l2_digits = ""
-        while l1 or l2:
-            if l1:
-                l1_digits += str(l1.val)
-                l1 = l1.next
-            if l2:
-                l2_digits+= str(l2.val)
-                l2 = l2.next 
-        new_digits = str(int(l1_digits[: :-1]) + int(l2_digits[: :-1]))[: :-1]
-        
-        dummyNode = curr = ListNode()
-        for x in range(len(new_digits)):
-            curr.next = ListNode(val=int(new_digits[x])) #curr.next = 7
+        dummy = curr = ListNode()
+        carry = 0
+        while l1 or l2 or carry:
+            v1 = l1.val if l1 else 0 
+            v2 = l2.val if l2 else 0 
+            
+            val = v1+v2+carry
+            carry = val // 10 
+            val = val % 10
+            curr.next = ListNode(val)
+            
             curr = curr.next 
-        return dummyNode.next
+            l1 = l1.next if l1 else None
+            l2 = l2.next if l2 else None
+        return dummy.next
             
         
