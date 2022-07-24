@@ -12,7 +12,7 @@ class Solution(object):
             v2 = l2.val if l2 else 0 
             
             val = v1+v2+carry
-            carry = val // 10 
+            carry = 1 if val >= 10 else 0
             val = val % 10
             curr.next = ListNode(val)
             
