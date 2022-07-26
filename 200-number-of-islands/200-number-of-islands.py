@@ -22,6 +22,7 @@ class Solution(object): #DFS
         for x in range(rows):
             for y in range(cols):
                 if grid[x][y] == '1':
+                    res+=1
                     find_island(x,y)
-                    res += 1 
+                    #res += 1 
         return res
