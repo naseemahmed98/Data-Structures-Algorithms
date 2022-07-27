@@ -11,13 +11,13 @@ class Solution(object): #DFS
                 r,c = queue.pop(0)
                 if (r,c) not in visited:
                     visited.add((r,c))
-                    if r - 1 >= 0 and grid[r-1][c] == '1' and [r-1,c] not in queue:
+                    if r - 1 >= 0 and grid[r-1][c] == '1':
                         queue.append([r-1,c])
-                    if r + 1 < rows and grid[r+1][c] == '1' and [r+1,c] not in queue :
+                    if r + 1 < rows and grid[r+1][c] == '1':
                         queue.append([r+1,c])
-                    if c - 1 >= 0 and grid[r][c-1] == '1'and [r,c-1] not in queue:
+                    if c - 1 >= 0 and grid[r][c-1] == '1':
                         queue.append([r,c-1])
-                    if c+1 < cols and grid[r][c+1] == '1' and [r,c+1] not in queue:
+                    if c+1 < cols and grid[r][c+1] == '1':
                         queue.append([r,c+1])
             
         for r in range(rows):
