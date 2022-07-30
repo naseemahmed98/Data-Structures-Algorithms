@@ -1,12 +1,12 @@
 class Solution(object):
     def merge(self, intervals):
-        if intervals == []:
-            return [] 
+        
         intervals.sort()
-        result = []
+        res = [intervals[0]]
+        
         for x in intervals:
-            if result == [] or result[-1][1] < x[0]:
-                result.append(x)
+            if res[-1][1] < x[0]:
+                res.append(x)
             else:
-                result[-1][1] = max(x[1], result[-1][1])
-        return result 
+                res[-1][1] = max(res[-1][1], x[1])
+        return res
