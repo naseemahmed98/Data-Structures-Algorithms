@@ -1,13 +1,13 @@
+from collections import Counter
+
 class Solution(object):
     def firstUniqChar(self, s):
-        frequency = {}
-        for x in range(len(s)):
-            if s[x] not in frequency:
-                frequency[s[x]] = 1
-            else:
-                frequency[s[x]] += 1 
-        for x in range(len(s)):
-            if frequency[s[x]] == 1:
-                return x
+        count = Counter(s)
+        
+        for index, char in enumerate(s):
+            if count[char] == 1:
+                return index 
+        
+        print(count)
         return -1
         
