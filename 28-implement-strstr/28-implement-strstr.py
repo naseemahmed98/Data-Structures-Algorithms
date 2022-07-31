@@ -3,7 +3,7 @@ class Solution(object):
         if needle == "":
             return 0 
         
-        for i in range(len(haystack) + 1 - len(needle)):
-            if haystack[i: i+len(needle)] == needle:
-                return i 
+        for x in range(len(haystack) + 1 - len(needle)):
+            if haystack[x:x+len(needle)] == needle:
+                return x
         return -1
