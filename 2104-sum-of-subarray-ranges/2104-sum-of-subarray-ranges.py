@@ -4,7 +4,7 @@ class Solution(object):
         max_val = nums[l]
         min_val = nums[l]
         total = 0 
-        while l >= 0 and r < len(nums):
+        while r < len(nums):
             max_val = max(max_val,nums[r])
             min_val = min(min_val,nums[r])
             total += max_val - min_val
