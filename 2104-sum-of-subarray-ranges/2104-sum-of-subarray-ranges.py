@@ -1,18 +1,13 @@
 class Solution(object):
     def subArrayRanges(self, nums):
         total = 0 
-        l, r = 0, 1 
         max_val, min_val = nums[0], nums[0]
-        while r < len(nums):
-            max_val = max(max_val, nums[r])
-            min_val = min(min_val, nums[r])
-            total += max_val - min_val
-            
-            if r == len(nums)-1:
-                max_val, min_val = nums[l+1], nums[l+1]
-                l += 1 
-                r = l + 1 
-            
-            else:
-                r += 1 
+        
+        for x in range(len(nums)):
+            for y in range(x+1, len(nums)):
+                max_val, min_val = max(max_val,nums[y]), min(min_val,nums[y])
+                total += max_val - min_val
+                
+                if y == len(nums)-1:
+                    max_val, min_val = nums[x+1], nums[x+1]
         return total
