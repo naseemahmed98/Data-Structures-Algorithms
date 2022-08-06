@@ -1,13 +1,23 @@
-class Solution(object):
-    def subArrayRanges(self, nums):
-        total = 0 
-        max_val, min_val = nums[0], nums[0]
+class Solution:
+    def subArrayRanges(self, nums: List[int]) -> int:
+        n = len(nums)
+        minsum = maxsum = 0
+        stack = []
+        for next_smaller in range(n + 1):
+			
+            while stack and (next_smaller == n or nums[stack[-1]] > nums[next_smaller]):
+                i = stack.pop()
+                prev_smaller = stack[-1] if stack else -1
+                minsum += nums[i] * (next_smaller - i) * (i - prev_smaller)
+            stack.append(next_smaller)
+     
+        stack = []
+        for next_larger in range(n + 1):
+	
+            while stack and (next_larger == n or nums[stack[-1]] < nums[next_larger]):
+                i = stack.pop()
+                prev_larger = stack[-1] if stack else -1
+                maxsum += nums[i] * (next_larger - i) * (i - prev_larger)
+            stack.append(next_larger)
         
-        for x in range(len(nums)):
-            for y in range(x+1, len(nums)):
-                max_val, min_val = max(max_val,nums[y]), min(min_val,nums[y])
-                total += max_val - min_val
-                
-                if y == len(nums)-1:
-                    max_val, min_val = nums[x+1], nums[x+1]
-        return total
+        return maxsum - minsum
