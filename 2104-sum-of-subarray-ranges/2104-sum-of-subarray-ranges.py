@@ -1,6 +1,5 @@
 class Solution:
     def subArrayRanges(self, nums):
-        
         minsum = maxsum = 0
         stack = []
         for x in range(len(nums)+1):
@@ -16,10 +15,12 @@ class Solution:
      
         stack = []
         for next_larger in range(len(nums) + 1):
-	
             while stack and (next_larger == len(nums) or nums[stack[-1]] < nums[next_larger]):
                 i = stack.pop()
-                prev_larger = stack[-1] if stack else -1
+                if stack:
+                    prev_larger = stack[-1]  
+                else:
+                    prev_larger = -1
                 maxsum += nums[i] * (next_larger - i) * (i - prev_larger)
             stack.append(next_larger)
         
