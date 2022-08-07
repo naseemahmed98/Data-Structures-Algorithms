@@ -3,7 +3,6 @@ class Solution(object):
         total_health = 1
         damage.sort(reverse = True)
         armor_state = True 
-        # armor = 4... damage = [7,4,3,2]
         
         for x in damage:
             if armor_state:
