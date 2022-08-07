@@ -8,7 +8,7 @@ class Solution(object):
             res.append([[p[0],p[1]],dis])
         
         res.sort(key = lambda x: x[1])
-        print(res)
+       
         for x in range(k):
             res2.append(res[x][0])
         return res2
