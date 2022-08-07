@@ -6,7 +6,6 @@ class Solution(object):
         # armor = 4... damage = [7,4,3,2]
         
         for x in damage:
-            print(x, armor, total_health)
             if armor_state:
                 if x >= armor:
                     total_health += (x - armor)
