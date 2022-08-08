@@ -1,21 +1,31 @@
 class Solution:
-    def calculate(self, s):
-        
-        numbers = set("0123456789")
-        s = "0+%s+" % s.replace(" ", "")
-        op, val, stack = "+", 0, deque()
-        
-        ops = {}
-        ops["+"] = lambda x: x
-        ops["-"] = lambda x: -x
-        ops["*"] = lambda x: x * stack.pop()
-        ops["/"] = lambda x: int(1.0 * stack.pop() / x)
-        
-        for c in s:
-            if c in numbers:
-                val = 10 * val + int(c)
-            else:
-                stack.append(ops[op](val))
-                op, val = c, 0
-                
-        return sum(stack)
+	def calculate(self, s):
+
+		stack = []
+		curr = 0
+		op = "+"
+
+		for i in range(0, len(s)):
+
+			if s[i].isdigit():
+				curr = curr*10 + ord(s[i]) - ord("0")
+
+			if (not s[i].isdigit() and not s[i].isspace()) or i == len(s)-1:
+
+				if op == "-":
+					stack.append(-curr)
+				elif op == "+":
+					stack.append(curr)
+				elif op == "*":
+					stack.append(stack.pop()*curr)
+				else:
+					temp = stack.pop()
+					if temp//curr < 0 and temp%curr != 0:
+						stack.append(temp//curr + 1)
+					else:
+						stack.append(temp//curr)
+
+				op = s[i]
+				curr = 0
+
+		return sum(stack)
