@@ -5,7 +5,7 @@ class Solution:
 		curr = 0
 		op = "+"
 
-		for i in range(0, len(s)):
+		for i in range(len(s)):
 
 			if s[i].isdigit():
 				curr = curr*10 + ord(s[i]) - ord("0")
