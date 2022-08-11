@@ -11,14 +11,16 @@ class Solution(object):
         self.p2 = None
         self.pre = TreeNode(float('-inf'))
         def dfs(node):
-            if node:
-                dfs(node.left)
-                if not self.p1 and node.val<self.pre.val:
-                    self.p1 = self.pre
-                if self.p1 and node.val<self.pre.val:
-                    self.p2 = node
-                self.pre = node
-                dfs(node.right)
+            if not node:
+                return
+            dfs(node.left)
+            if not self.p1 and node.val<self.pre.val:
+                self.p1 = self.pre
+            if self.p1 and node.val<self.pre.val:
+                self.p2 = node
+            self.pre = node
+            dfs(node.right)
+        
         dfs(root)
         self.p1.val,self.p2.val = self.p2.val,self.p1.val
         
