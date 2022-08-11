@@ -20,7 +20,6 @@ class Solution(object):
                 self.p2 = node
             self.pre = node
             dfs(node.right)
-        
         dfs(root)
         self.p1.val,self.p2.val = self.p2.val,self.p1.val
         
