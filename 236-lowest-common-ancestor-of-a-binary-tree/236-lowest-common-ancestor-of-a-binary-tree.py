@@ -16,7 +16,7 @@ class Solution(object):
             curr = (node == p) or (node == q)
             if (left and curr) or (left and right) or (right and curr):
                 self.res = node 
-                return 
+                return False
             return left or right or curr 
         
         dfs(root)
