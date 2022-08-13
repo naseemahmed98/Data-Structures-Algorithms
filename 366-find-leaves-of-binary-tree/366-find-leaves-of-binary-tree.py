@@ -6,31 +6,19 @@
 #         self.right = right
 class Solution(object):
     def findLeaves(self, root):
-        if not root.left and not root.right:
-            return [[root.val]]
-        head = root
-        res = []
-        lst = []
-        def findLeaf(node):
         
+        def getHeight(node):
             if not node:
-                return 
-            if not node.left and not node.right:
-                lst.append(node.val)
-                return True 
-            if findLeaf(node.left):
-                node.left = None
-            if findLeaf(node.right):
-                node.right = None
-           
-              
-        while root.left or root.right:
-            findLeaf(root)
-            res.append(lst)
-            lst = []
-        res.append([root.val])
-        return res
-        
+                return -1 
+            height = max(getHeight(node.left),getHeight(node.right)) + 1 
+            if height >= len(result):
+                result.append([])
+            
+            result[height].append(node.val)
+            return height
+        result = []
+        height_of_root = getHeight(root)
+        return result
             
             
         
