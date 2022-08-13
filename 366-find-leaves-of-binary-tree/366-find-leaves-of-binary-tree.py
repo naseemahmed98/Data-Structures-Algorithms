@@ -11,11 +11,12 @@ class Solution(object):
             if not node:
                 return -1 
             height = max(getHeight(node.left),getHeight(node.right)) + 1 
-            if height >= len(result):
+            if height == len(result):
                 result.append([])
             
             result[height].append(node.val)
             return height
+        
         result = []
         getHeight(root)
         return result
