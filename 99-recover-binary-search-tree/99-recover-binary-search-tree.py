@@ -6,22 +6,21 @@
 #         self.right = right
 class Solution(object):
     def recoverTree(self, root):
-        
-        self.p1 = None
-        self.p2 = None
-        self.pre = TreeNode(float('-inf'))
-        def dfs(node):
+        self.previous_node = TreeNode(float("-inf"))
+        self.switch_one, self.switch_two = None, None 
+        def inorder(node):
             if not node:
-                return
-            dfs(node.left)
-            if not self.p1 and node.val<self.pre.val:
-                self.p1 = self.pre
-            if self.p1 and node.val<self.pre.val:
-                self.p2 = node
-            self.pre = node
-            dfs(node.right)
-        dfs(root)
-        self.p1.val,self.p2.val = self.p2.val,self.p1.val
+                return 
+            inorder(node.left)
+            if not self.switch_one and node.val < self.previous_node.val:
+                self.switch_one = self.previous_node
+            if self.switch_one and node.val < self.previous_node.val:
+                self.switch_two = node
+            self.previous_node = node 
+            inorder(node.right)
         
+        inorder(root)
+        self.switch_one.val, self.switch_two.val = self.switch_two.val,self.switch_one.val
         
+            
         
