@@ -17,7 +17,7 @@ class Solution(object):
             result[height].append(node.val)
             return height
         result = []
-        height_of_root = getHeight(root)
+        getHeight(root)
         return result
             
             
