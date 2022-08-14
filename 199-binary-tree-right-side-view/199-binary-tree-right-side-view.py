@@ -24,7 +24,7 @@ class Solution(object):
                 queue.pop(0)
             levels.append(lst)
             bfs(queue)
-            return levels
+            #return levels
     
         bfs(queue)
         for x in range(len(levels)):
