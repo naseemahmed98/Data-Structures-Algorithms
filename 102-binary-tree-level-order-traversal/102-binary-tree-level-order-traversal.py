@@ -6,21 +6,25 @@
 #         self.right = right
 class Solution(object):
     def levelOrder(self, root):
-        if root is None:
-            return []
-        queue = [root]
-        new_queue = []
-        level = []
-        result = []
-        while queue != []:
-            for x in queue:
-                level.append(x.val)
-                if x.left:
-                    new_queue.append(x.left)
-                if x.right:
-                    new_queue.append(x.right)
-            result.append(level)
-            level = []
-            queue = new_queue
-            new_queue = []
-        return result 
+        if not root:
+            return root
+        res = []
+        def add_children(stack):
+            
+            if not stack:
+                return res
+            vals = []
+            for x in range(len(stack)):
+                vals.append(stack[0].val)
+                if stack[0].left:
+                    stack.append(stack[0].left)
+                if stack[0].right:
+                    stack.append(stack[0].right)
+                stack.pop(0)
+            res.append(vals)
+            add_children(stack)
+            return res 
+        return add_children([root])
+        
+        
+        
