@@ -12,7 +12,7 @@ class Solution(object):
         def add_children(stack):
             
             if not stack:
-                return res
+                return 
             vals = []
             for x in range(len(stack)):
                 vals.append(stack[0].val)
