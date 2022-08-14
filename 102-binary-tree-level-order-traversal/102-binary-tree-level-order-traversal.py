@@ -23,8 +23,9 @@ class Solution(object):
                 stack.pop(0)
             res.append(vals)
             add_children(stack)
-            return res 
-        return add_children([root])
+             
+        add_children([root])
+        return res
         
         
         
