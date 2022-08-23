@@ -1,60 +1,49 @@
-# Definition for a binary tree node.
-# class TreeNode(object):
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
-
-#both exist 
-#left exists
-#right exists
-#neither exist
-
-class Solution(object):
+class Solution:
     def boundaryOfBinaryTree(self, root):
-        if not root:
-            return []
-        res = [root.val]
-        if root.left:
-            self.leftNode(root.left,res)
-        if root.left or root.right:
-            self.leafNode(root,res)
-        if root.right:
-            self.rightNode(root.right,res)
-        return res
+        if not root.left and not root.right:
+            return [root.val]
         
-    def leftNode(self,root,res):                  #pre-order
-        if not root:
-            return
-        if root.left:                             
-            res.append(root.val)
-            self.leftNode(root.left,res)
-        elif root.right:
-            res.append(root.val)
-            self.leftNode(root.right,res)
-        # print("left",res)
-        return res
-    
-    
-    def rightNode(self,root,res):                 #post-order
-        if not root:
-            return
-        if root.right:                              
-            self.rightNode(root.right,res)
-            res.append(root.val)
-        elif root.left:
-            self.rightNode(root.left,res)
-            res.append(root.val)
-        # print("right",res)
-        return res
-    
-    
-    def leafNode(self,root,res):
-        if not root:
-            return
-        if not root.right and not root.left:
-            res.append(root.val)
-        self.leafNode(root.left,res)
-        self.leafNode(root.right,res)
-        # print("leaf",res)
-        return res
+        
+        def dfs(node, arr, is_right):
+            
+            if not node:
+                return 
+            
+            elif not node.left and not node.right:
+                return 
+            
+            arr.append(node.val)
+            if is_right:
+                if node.right:
+                    dfs(node.right, arr, is_right)
+
+                else:
+                    dfs(node.left, arr, is_right)
+            else:
+                if node.left:
+                    dfs(node.left, arr, is_right)
+                else:
+                    dfs(node.right, arr, is_right)
+                    
+        def find_leaf(node):
+            if not node.left and not node.right:
+                leaves.append(node.val)
+                return
+            if node.left:
+                find_leaf(node.left)
+                
+            if node.right:
+                find_leaf(node.right)
+                
+                
+        
+        
+        right = []
+        dfs(root.right, right, True)
+        left = []
+        dfs(root.left, left, False)
+        leaves = []
+        find_leaf(root)
+            
+        
+        return [root.val] + left + leaves + list(reversed(right))
