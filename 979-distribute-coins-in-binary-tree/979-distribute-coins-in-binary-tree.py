@@ -7,20 +7,17 @@
 class Solution:
     def distributeCoins(self, root):
         
-        self.steps = 0
+        self.moves = 0 
         
-        def coins(curr):
-            if not curr:
+        def countCoins(node):
+            if not node:
                 return 0
-            
-            left_coins = coins(curr.left)
-            right_coins = coins(curr.right)
-            self.steps += abs(left_coins) + abs(right_coins)
-
-            return (left_coins + right_coins + curr.val) - 1
-            
+            leftCount = countCoins(node.left)
+            rightCount = countCoins(node.right)
+            self.moves += abs(leftCount) + abs(rightCount)
+            return (leftCount + rightCount + node.val) - 1 
         
-        coins(root)
-        
-        return self.steps
-           
+        countCoins(root)
+        return self.moves
+            
+            
