@@ -9,7 +9,7 @@ class Solution:
             if not node:
                 return 
             
-            elif not node.left and not node.right:
+            if not node.left and not node.right:
                 return 
             
             arr.append(node.val)
