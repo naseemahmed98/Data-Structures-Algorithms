@@ -3,9 +3,10 @@ class Solution(object):
         
         preMap = collections.defaultdict(list)
         for crs, pre in prerequisites:
-            preMap[crs].append(pre)
+            preMap[pre].append(crs)
         visitedSet = set()
         
+        print(preMap)
         def dfs(crs):
             if crs in visitedSet:
                 return False
@@ -20,6 +21,6 @@ class Solution(object):
             return True 
         
         for crs in range(numCourses):
-            if dfs(crs) is False:
+            if not dfs(crs):
                 return False
         return True
