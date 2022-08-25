@@ -6,18 +6,18 @@ class Solution(object):
         visit, cycle = set(), set()
         res = []
         
-        def dfs(crs):
-            if crs in cycle:
+        def dfs(pre):
+            if pre in cycle:
                 return False
-            if crs in visit:
+            if pre in visit:
                 return True
-            cycle.add(crs)
-            for pre in preMap[crs]:
-                if not dfs(pre):
+            cycle.add(pre)
+            for crs in preMap[pre]:
+                if not dfs(crs):
                     return False
-            cycle.remove(crs)
-            visit.add(crs)
-            res.append(crs)
+            cycle.remove(pre)
+            visit.add(pre)
+            res.append(pre)
             return True 
         
         for crs in range(numCourses):
