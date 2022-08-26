@@ -3,30 +3,33 @@ class Solution(object):
         preMap = collections.defaultdict(list)
         for crs, pre in prerequisites:
             preMap[crs].append(pre)
-        visit, cycle = set(), set()
+        
+        
+        cycle, visited = set(), set()
         res = []
         
-        def dfs(pre):
-            if pre in cycle:
+        def dfs(crs):
+            if crs in cycle:
                 return False
-            if pre in visit:
-                return True
-            cycle.add(pre)
-            for crs in preMap[pre]:
-                if not dfs(crs):
+            
+            if crs in visited:
+                return True 
+            
+            cycle.add(crs)
+            for pre in preMap[crs]:
+                if not dfs(pre):
                     return False
-            cycle.remove(pre)
-            visit.add(pre)
-            res.append(pre)
-            return True 
+            
+            cycle.remove(crs)
+            visited.add(crs)
+            res.append(crs)
+            return True
         
-        for crs in range(numCourses):
-            if not dfs(crs):
+        for x in range(numCourses):
+            if not dfs(x):
                 return []
+        
         return res
-        
-
-        
         
         
         
