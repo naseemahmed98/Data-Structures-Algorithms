@@ -1,35 +1,34 @@
 class Solution(object):
     def findOrder(self, numCourses, prerequisites):
-        preMap = collections.defaultdict(list)
-        for crs, pre in prerequisites:
-            preMap[crs].append(pre)
+        num_pre = [0] * numCourses 
+        prereq_list = []
+        for x in range(numCourses):
+            prereq_list.append([])
+        no_prereqs = []
         
-        
-        cycle, visited = set(), set()
-        res = []
-        
-        def dfs(crs):
-            if crs in cycle:
-                return False
-            
-            if crs in visited:
-                return True 
-            
-            cycle.add(crs)
-            for pre in preMap[crs]:
-                if not dfs(pre):
-                    return False
-            
-            cycle.remove(crs)
-            visited.add(crs)
-            res.append(crs)
-            return True
+        for b,a in prerequisites:
+            num_pre[b] += 1 
+            prereq_list[a].append(b)
         
         for x in range(numCourses):
-            if not dfs(x):
-                return []
+            if num_pre[x] == 0:
+                no_prereqs.append(x)
         
-        return res
+        counter = 0 
+        res = []
+        while no_prereqs:
+            course = no_prereqs.pop(0)
+            counter += 1 
+            res.append(course)
+            for x in prereq_list[course]:
+                num_pre[x] -= 1 
+                if num_pre[x] == 0:
+                    no_prereqs.append(x)
+                    
+        if counter == numCourses:
+            return res 
+        else:
+            return []
         
         
         
