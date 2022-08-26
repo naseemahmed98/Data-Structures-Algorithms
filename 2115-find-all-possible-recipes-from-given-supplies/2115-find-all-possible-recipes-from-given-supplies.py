@@ -6,20 +6,24 @@ class Solution:
                 map1[recipes[i]] = ingredients[i]
         visited = set()
 		
-        recipes = set(recipes)
-        supplies = set(supplies)
+        recipe_set = set(recipes)
+        supplies_set= set(supplies)
         def dfs(food):
+           
             if food in supplies or map1.get(food,[])==[]:
                 return True
             elif food in visited:
                 return False
+         
             visited.add(food)
             for i in map1[food]:
-                if (i not in supplies and i not in recipes ) or not dfs(i):
+                if (i not in supplies_set and i not in recipe_set ) or not dfs(i):
                     return False
             res.append(food)
             map1[food] = []
-            return True  
-        for i in map1:
-                dfs(i)
+            return True
+             
+       
+        for i in recipes:
+            dfs(i)
         return res
