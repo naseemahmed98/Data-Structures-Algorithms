@@ -15,6 +15,6 @@ class Solution:
                 if i not in costMap or cost+w<costMap[i] : 
                     costMap[i] = w+cost
                     if dist<k:
-                        q.append((i,dist+1,cost+w))  
+                        q.append((i,dist+1,costMap[i]))
 
         return costMap[dest] if dest in costMap else -1
