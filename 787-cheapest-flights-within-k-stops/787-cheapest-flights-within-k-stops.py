@@ -1,20 +1,21 @@
 class Solution:
     def findCheapestPrice(self, n, flights, src, dest, k):
-        dp = defaultdict(list)
-        for i,j,w in flights: 
-            dp[i].append((j,w)) 
-
-        q = deque([(src,0,0)])
-        visited = set()
-        res = float("inf")
-        costMap = {src:0}
-
-        while q: 
-            node,dist,cost = q.popleft()
-            for i,w in dp[node]: 
-                if i not in costMap or cost+w<costMap[i] : 
-                    costMap[i] = w+cost
-                    if dist<k:
-                        q.append((i,dist+1,costMap[i]))
-
+        dp = collections.defaultdict(list)
+        for start, end, cost in flights:
+            dp[start].append((end,cost))
+        
+        costMap = {src:0} 
+        
+        queue = deque([(src,0,0)])
+        
+        while queue:
+            currFlight, cost, distance = queue.popleft()
+            for nextTrip, nextTripCost in dp[currFlight]:
+                if nextTrip not in costMap or costMap[nextTrip] > nextTripCost + cost:
+                    costMap[nextTrip] = nextTripCost + cost
+                    if distance < k:
+                        queue.append((nextTrip,costMap[nextTrip],distance+1))
+        
         return costMap[dest] if dest in costMap else -1
+                    
+        
