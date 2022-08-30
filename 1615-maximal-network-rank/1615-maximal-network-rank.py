@@ -1,15 +1,18 @@
 class Solution:
-    def maximalNetworkRank(self, n,roads):
-        hashmap=collections.defaultdict(set)
-        for x,y in roads:
-            hashmap[x].add(y)
-            hashmap[y].add(x)
-        res = 0
-        for i in range(n):
-            for j in range(i+1,n):
-                totalNetwork = len(hashmap[i]) + len(hashmap[j])
-                if j in hashmap[i]:
-                    res=max(res,totalNetwork-1)
+    def maximalNetworkRank(self, n, roads):
+        hashMap = collections.defaultdict(set)
+        res = 0 
+        for x, y in roads:
+            hashMap[x].add(y)
+            hashMap[y].add(x)
+        
+        for x in range(n):
+            for y in range(x+1,n):
+                totalNetwork = len(hashMap[x]) + len(hashMap[y])
+                if x in hashMap[y]:
+                    res = max(res,totalNetwork-1)
                 else:
-                    res=max(res,totalNetwork)
+                    res = max(res,totalNetwork)
         return res
+                
+        
