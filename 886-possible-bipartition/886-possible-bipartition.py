@@ -9,7 +9,7 @@ class Solution:
         def dfs(node, col):
             color[node] = col
             for neigh in graph[node]:
-                if color[neigh] == col:
+                if color[neigh] == color[node]:
                     return False
                 if color[neigh] == 0 and not dfs(neigh, -col):
                     return False
