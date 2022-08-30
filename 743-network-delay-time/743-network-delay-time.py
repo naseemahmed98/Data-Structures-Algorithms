@@ -6,7 +6,6 @@ class Solution(object):
         for x,y,z in times:
             networkMapping[x].append((y,z)) 
 
-        print(networkMapping)
         signalTimes = {k:0}
         queue = deque([(k,0)])
         
