@@ -1,27 +1,22 @@
 class Solution(object):
-     def networkDelayTime(self, times, N, K):
-        graph = collections.defaultdict(list)
+    def networkDelayTime(self, times, n, k):
+        
+        networkMapping = collections.defaultdict(list)
+        
         for x,y,z in times:
-            graph[x].append((y,z))
-        
-        distance = {}
-        for x in range(1,N+1):
-            distance[x] = float("inf")
-        
-        def dfs(node,totalTime):
-            if distance[node] <= totalTime:
-                return 
-            distance[node] = totalTime
-            
-            graph[node].sort(key = lambda x: x[1])
-            for nextNode, nextNodeTime in graph[node]:
-                dfs(nextNode,totalTime+nextNodeTime)
-            
-            return
+            networkMapping[x].append((y,z)) 
+
+        signalTimes = {k:0}
+        queue = deque([(k,0)])
         
         
-        dfs(K,0)
-        res = max(list(distance.values()))
-        return res if res < float("inf") else -1
-    
-    
+        while queue:
+            node,time = queue.popleft()
+            for nextNode, nextNodeTime in networkMapping[node]:
+                if nextNode == k: 
+                    continue
+                if (nextNode not in signalTimes) or (time + nextNodeTime < signalTimes[nextNode]):
+                    signalTimes[nextNode] = time + nextNodeTime
+                    queue.append((nextNode,signalTimes[nextNode]))
+       
+        return max(list(signalTimes.values())) if len(signalTimes) == n else -1
