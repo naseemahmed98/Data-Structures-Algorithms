@@ -2,13 +2,15 @@ class Solution(object):
      def networkDelayTime(self, times, N, K):
         graph = collections.defaultdict(list)
         for u, v, w in times:
-            graph[u].append((w, v)) # u --> v
+            graph[u].append((w, v)) 
+        print(graph)
         
         INF = float('inf')
         dist = {node: INF for node in range(1, N+1)}
         
         def dfs(node, elasped):
-            if dist[node] <= elasped: return
+            if dist[node] <= elasped: 
+                return
             dist[node] = elasped
             for time, nei in sorted(graph[node]):
                 dfs(nei, time+elasped)
