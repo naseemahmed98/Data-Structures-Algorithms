@@ -1,11 +1,17 @@
+
+
+    
 class Solution(object):
     def climbStairs(self, n):
-        def dp(n):
-            if n == 0 or n == 1:
+        def dp(step):
+            if step == 0 or step == 1:
                 return 1 
-            if n in d:
-                return d[n]
-            d[n] = dp(n-1) + dp(n-2)
-            return d[n]
+            if step in d:
+                return d[step]
+            d[step] = dp(step-1) + dp(step-2)
+            return d[step]
         d = {}
         return dp(n)
+    
+    
+    
