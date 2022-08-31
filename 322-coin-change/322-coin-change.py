@@ -1,16 +1,10 @@
-class Solution:
+class Solution(object):
     def coinChange(self, coins, amount):
-        memo = {}
-        
-        def check(amount):
-            if amount in memo: 
-                return memo[amount]
-            if amount == 0: 
-                return 0
-            if amount < 0: 
-                return float("inf")
-            memo[amount] = min([1 + check(amount - coin) for coin in coins])
-            return memo[amount]
-        
-        minimum = check(amount)
-        return minimum if minimum != float("inf") else -1
+        dp = [amount+1] * (amount+1)
+        dp[0] = 0 
+        for x in range(1,amount+1):
+            for y in coins:
+                if x >= y:
+                    dp[x] = min(dp[x],1+dp[x-y])
+        return dp[-1] if dp[-1] < amount+1 else -1
+            
