@@ -1,23 +1,30 @@
 class Solution:
     def possibleBipartition(self, N, dislikes):
         graph = collections.defaultdict(list)
-        for u,v in dislikes:
-            graph[u].append(v)
-            graph[v].append(u)
-            
-            
-        def dfs(node, col):
-            color[node] = col
-            for neigh in graph[node]:
-                if color[neigh] == color[node]:
-                    return False
-                if color[neigh] == 0 and not dfs(neigh, -col):
-                    return False
-            return True 
+        for x,y in dislikes:
+            graph[x].append(y)
+            graph[y].append(x)
         
         
-        color = [0] * (N+1)  
-        for i in range(1,N):
-            if color[i] == 0 and not dfs(i, 1):
-                return False
+        visited = [-1]* (N+1)
+        def bfs(queue):
+            visited[queue[0]] = 0
+            while queue:
+                person = queue.popleft()
+                for node in graph[person]:
+                    if visited[person] == visited[node]:
+                        return False
+                    else:
+                        if visited[node] == -1:
+                            visited[node] = 1 - visited[person]
+                            queue.append(node)
+                    
+            return True
+        
+        
+        
+        for x in range(1,N+1):
+            if visited[x] == -1:
+                if not bfs(deque([x])):
+                    return False
         return True
