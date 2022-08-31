@@ -1,10 +1,24 @@
 class Solution(object):
     def coinChange(self, coins, amount):
-        dp = [amount+1] * (amount+1)
-        dp[0] = 0 
-        for x in range(1,amount+1):
-            for y in coins:
-                if x >= y:
-                    dp[x] = min(dp[x],1+dp[x-y])
-        return dp[-1] if dp[-1] < amount+1 else -1
+        memoization = {}
+        
+        def topDown(num):
+            if num == 0:
+                return 0 
+            if num in memoization:
+                return memoization[num]
+            memoization[num] = amount + 1
+            for x in coins:
+                if num >= x:
+                    memoization[num] = min(memoization[num],1 + topDown(num-x))
+            return memoization[num]
+            
+        return topDown(amount) if topDown(amount) < amount + 1 else -1
+        
+    
+            
+        
+        
+        
+                
             
