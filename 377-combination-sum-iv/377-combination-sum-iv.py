@@ -1,17 +1,9 @@
-class Solution:
-    def combinationSum4(self, nums,target):
-        memo = {}
-        def dfs(t):
-            if t == 0:
-                return 1
-            if t in memo:
-                return memo[t]
-            res = 0
-            if t >= 0:
-                for i in nums:
-                    res += dfs(t-i)
-                    memo[t] = res
-            return res
-        return (dfs(target))
-    
-    
+class Solution(object):
+    def combinationSum4(self, nums, target):
+        dp = [0] * (target + 1)
+        dp[0] = 1
+        for a in range(1,target + 1):
+            for c in nums:
+                if a >= c:
+                    dp[a] = dp[a] + dp[a - c]
+        return dp[target]
