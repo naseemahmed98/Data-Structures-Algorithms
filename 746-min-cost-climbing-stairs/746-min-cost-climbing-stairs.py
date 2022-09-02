@@ -1,9 +1,9 @@
 class Solution:
     def minCostClimbingStairs(self, cost):
-        cost = deque(cost)
-        cost.appendleft(0)
-        for x in range(2,len(cost)):
-            
-            cost[x] = min(cost[x-1]+cost[x], cost[x-2]+cost[x])
+        dp = deque(cost)
+        print(dp)
+        dp.appendleft(0)
         
-        return min(cost[-1],cost[-2])
+        for x in range(2,len(dp)):
+            dp[x] = min(dp[x-1]+cost[x-1], dp[x-2]+cost[x-1])
+        return min(dp[-2],dp[-1])
