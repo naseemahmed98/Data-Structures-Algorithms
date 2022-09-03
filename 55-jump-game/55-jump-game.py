@@ -1,10 +1,16 @@
 class Solution:
     def canJump(self, nums):
+        n = len(nums)
+        farthest = 0
         
-        flag = len(nums)-1
-        for x in range(len(nums)-2,-1,-1):
-            if nums[x] + x >= flag:
-                flag = x 
-        if flag == 0:
+        if n == 1:
             return True
-        return False
+        
+        for i in range(n):
+            if i <= farthest:
+                farthest = max(farthest, i + nums[i])
+                if farthest >= n-1:
+                    return True
+        
+            if i > farthest:
+                return False
