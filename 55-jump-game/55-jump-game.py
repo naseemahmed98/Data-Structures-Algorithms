@@ -9,8 +9,9 @@ class Solution:
         for i in range(n):
             if i <= farthest:
                 farthest = max(farthest, i + nums[i])
-                if farthest >= n-1:
-                    return True
+                
+            if farthest >= n-1:
+                return True
         
             if i > farthest:
                 return False
