@@ -1,10 +1,19 @@
 class Solution:
     def canJump(self, nums):
     
-        flag = len(nums) - 1
+        flag = 0
+        if len(nums) == 1:
+            return True
         
-        for x in range(len(nums)-2,-1,-1):
-            if x + nums[x] >= flag:
-                flag = x 
+        for x in range(len(nums)):
+            if x <= flag:
+                if flag < nums[x] + x:
+                    flag = nums[x] + x
+                
+                if flag >= len(nums)-1:
+                    return True
+            
+            if x > flag:
+                return False
         
-        return True if flag == 0 else False
+        
