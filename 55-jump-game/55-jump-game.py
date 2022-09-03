@@ -9,7 +9,7 @@ class Solution:
                 if nums[x] + x >= flag:
                     flag = nums[x]+x
            
-            if flag >= len(nums)-1:
-                return True
+                if flag >= len(nums)-1:
+                    return True
             if x > flag:
                 return False
