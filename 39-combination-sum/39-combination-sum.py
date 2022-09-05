@@ -7,11 +7,11 @@ class Solution:
             if total == target:
                 res.append(curr.copy())
                 return
-            if i >= len(candidates) or total > target:
+            if i == len(candidates) or total > target:
                 return 
             
             curr.append(candidates[i])
-            dfs(i,curr, total + candidates[i])
+            dfs(i, curr, total + candidates[i])
             curr.pop()
             dfs(i+1,curr,total)
         
