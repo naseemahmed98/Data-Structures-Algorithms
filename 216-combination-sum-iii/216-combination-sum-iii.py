@@ -1,20 +1,22 @@
 class Solution(object):
     def combinationSum3(self, k, n):
-        dp = [set() for x in range(n + 1)]
-        print(dp)
-        dp[0].add(())
-        #print(dp)
-        characters = [i for i in range(1, 10)]
-
-        for char_num in characters:
-            for num_range in range(n, char_num -1, -1):
-                for prev in dp[num_range - char_num]:
-                    current_val = prev + (char_num,)
-                    dp[num_range].add(current_val)
+        """
+        :type k: int
+        :type n: int
+        :rtype: List[List[int]]
+        """
         res = []
-        
-        for each in dp[-1]:
-            if len(each) == k:
-                res.append(each)
+        dp = [[] for x in range(n+1)]
+        for x in range(n):
+            if x >= 10:
+                break
+            dp[x].append([x])
+            for y in range(x+1,n+1):
+                for z in dp[y-x]:
+                    dp[y].append(z + [x])
+       
+        for x in dp[-1]:
+            if len(x) == k and len(set(x)) == len(x):
+                res.append(x)
         return res
                         
