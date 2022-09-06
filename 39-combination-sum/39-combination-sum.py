@@ -4,6 +4,7 @@ class Solution:
         res = []
         
         def dfs(i,curr,total):
+        
             if total == target:
                 res.append(curr.copy())
                 return
