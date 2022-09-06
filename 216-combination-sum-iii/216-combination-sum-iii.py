@@ -3,7 +3,7 @@ class Solution(object):
         dp = [set() for x in range(n + 1)]
         print(dp)
         dp[0].add(())
-        print(dp)
+        #print(dp)
         characters = [i for i in range(1, 10)]
 
         for char_num in characters:
