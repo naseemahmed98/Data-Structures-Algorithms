@@ -8,7 +8,7 @@ class Solution(object):
         res = []
         dp = [[] for x in range(n+1)]
         for x in range(n):
-            if x > 9:
+            if x >= 10:
                 break
             dp[x].append([x])
             for y in range(x+1,n+1):
