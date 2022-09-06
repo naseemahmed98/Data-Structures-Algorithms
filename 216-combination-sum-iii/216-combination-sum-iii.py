@@ -1,6 +1,6 @@
 class Solution(object):
     def combinationSum3(self, k, n):
-        dp = [set() for _ in range(n + 1)]
+        dp = [set() for x in range(n + 1)]
         dp[0].add(())
         characters = [i for i in range(1, 10)]
 
