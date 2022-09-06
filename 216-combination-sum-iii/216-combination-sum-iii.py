@@ -1,21 +1,18 @@
 class Solution(object):
     def combinationSum3(self, k, n):
-        """
-        :type k: int
-        :type n: int
-        :rtype: List[List[int]]
-        """
+        dp = [set() for _ in range(n + 1)]
+        dp[0].add(())
+        characters = [i for i in range(1, 10)]
+
+        for char_num in characters:
+            for num_range in range(n, char_num -1, -1):
+                for prev in dp[num_range - char_num]:
+                    current_val = prev + (char_num,)
+                    dp[num_range].add(current_val)
         res = []
-        dp = [[] for x in range(n+1)]
-        for x in range(n):
-            if x >= 10:
-                break
-            dp[x].append([x])
-            for y in range(x+1,n+1):
-                for z in dp[y-x]:
-                    dp[y].append(z + [x])
-        for x in dp[-1]:
-            if len(x) == k and len(set(x)) == len(x):
-                res.append(x)
+        print(dp)
+        for each in dp[-1]:
+            if len(each) == k:
+                res.append(each)
         return res
                         
