@@ -1,7 +1,7 @@
 class Solution(object):
     def change(self, amount, coins):
         
-        def f(i,target,dp):
+        def f(i,target):
             if target == 0:
                 return 1
             if i >= len(coins):
@@ -10,12 +10,11 @@ class Solution(object):
                 return dp[i][target]
             take = 0
             if coins[i] <= target:
-                take = f(i,target-coins[i],dp)
-            nottake = f(i+1,target,dp)
+                take = f(i,target-coins[i])
+            nottake = f(i+1,target)
             dp[i][target] = take + nottake
             return take + nottake
         dp = [[-1 for _ in range(amount+1)] for _ in range(len(coins)+1)]
-        
-        return f(0,amount,dp)
+        return f(0,amount)
     
         
