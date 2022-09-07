@@ -1,20 +1,15 @@
-class Solution:
-    def combinationSum3(self, k: int, target: int) -> List[List[int]]:
-        candidates = list(range(1,10))
+class Solution(object):
+    def combinationSum3(self, k, n):
+        dp = [[] for x in range(n+1)]
+        characters = list(range(1,10))
+        dp[0].append(())
+        
+        for x in characters:
+            for y in range(n,x-1,-1):
+                for z in dp[y-x]:
+                    dp[y].append(z+(x,))
         res = []
-        curr = []
-
-        def backtrack(i, curr, total):
-            if total==target and len(curr)==k:
-                res.append(curr.copy())
-                return
-            if i >= len(candidates) or total>target:
-                return
-
-            curr.append(candidates[i])
-            backtrack(i+1, curr, total+candidates[i])
-            curr.pop()
-            backtrack(i+1, curr, total)
-
-        backtrack(0, curr, 0)
+        for x in (dp[-1]):
+            if len(x) == k:
+                res.append(x)
         return res
