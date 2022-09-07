@@ -1,14 +1,20 @@
-class Solution:
-    def combinationSum(self, candidates : List[int], target: int) -> List[List[int]]:    
-        dp = [[] for x in range(target+1)]
+class Solution(object):
+    def combinationSum(self, candidates, target):
+        res = []
         
-        for x in candidates:
-            if x <= target:
-                dp[x].append([x])
-            for y in range(x+1,target+1):
-                for z in dp[y-x]:
-                    dp[y].append(z + [x])
-        return dp[-1]
+        def dfs(i,curr,total):
+            if total == target:
+                res.append(curr[:])
+                return
+            if i >= len(candidates) or total > target:
+                return 
+            
+            curr.append(candidates[i])
+            dfs(i,curr, total + candidates[i])
+            curr.pop()
+            dfs(i+1,curr,total)
+        
+        dfs(0,[],0)
+        return res
                 
-        
         
