@@ -11,7 +11,7 @@ class Solution(object):
                 prefix_sum[i] = 1 + prefix_sum[i - 1]
             else:
                 prefix_sum[i] = prefix_sum[i - 1]
-        print(prefix_sum)
+       
                 
         left_closest_pipe = [-1] * length
         if s[0] == '|':
