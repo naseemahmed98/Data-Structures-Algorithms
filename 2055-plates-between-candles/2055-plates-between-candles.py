@@ -2,6 +2,7 @@ class Solution(object):
     def platesBetweenCandles(self, s, queries):
      
 		p = [i for i in range(len(s)) if s[i] == '|']
+    
 
 		res = []
 		for f,t in queries: 
