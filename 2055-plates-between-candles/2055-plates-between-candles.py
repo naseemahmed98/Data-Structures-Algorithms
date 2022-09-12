@@ -33,12 +33,13 @@ class Solution(object):
                 right_closest_pipe[i] = i
             else:
                 right_closest_pipe[i] = right_closest_pipe[i + 1]
+     
         
         answers = []
         for start, end in queries:
             left_most_pipe_index = right_closest_pipe[start]
             right_most_pipe_index = left_closest_pipe[end]
-            if start <= right_most_pipe_index <= end and start <= left_most_pipe_index <= end:
+            if right_most_pipe_index - left_most_pipe_index > 1:
                 num_of_stars = prefix_sum[right_most_pipe_index] - prefix_sum[left_most_pipe_index]
                 answers.append(num_of_stars)
             else:
