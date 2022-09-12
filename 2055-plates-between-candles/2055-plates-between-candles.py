@@ -11,6 +11,7 @@ class Solution(object):
                 prefix_sum[i] = 1 + prefix_sum[i - 1]
             else:
                 prefix_sum[i] = prefix_sum[i - 1]
+        print(prefix_sum)
                 
         left_closest_pipe = [-1] * length
         if s[0] == '|':
@@ -18,7 +19,7 @@ class Solution(object):
         
         for i in range(1, length):
             if s[i] == '|':
-                left_closest_pipe[i] = max(left_closest_pipe[i], i)
+                left_closest_pipe[i] = i
             else:
                 left_closest_pipe[i] = left_closest_pipe[i - 1]
         
