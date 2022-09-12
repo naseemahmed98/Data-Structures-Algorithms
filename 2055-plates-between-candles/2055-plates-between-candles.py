@@ -8,7 +8,7 @@ class Solution(object):
         
         for i in range(1, length):
             if s[i] == '*':
-                prefix_sum[i] += 1 + prefix_sum[i - 1]
+                prefix_sum[i] = 1 + prefix_sum[i - 1]
             else:
                 prefix_sum[i] = prefix_sum[i - 1]
                 
