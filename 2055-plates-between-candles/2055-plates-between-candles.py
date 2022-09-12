@@ -1,17 +1,24 @@
 class Solution(object):
     def platesBetweenCandles(self, s, queries):
-        
-        candles = []
-        for i in range(len(s)):
-            if s[i] == '|':
-               candles.append(i)
-        res = []
-        for l, r in queries:
-            if l == r or not candles:
-                res.append(0)
+
+        cand_idx = []
+        for idx in range(len(s)):
+            if s[idx] == "|":
+                cand_idx.append(idx)
+        ans = []
+        for query in queries:
+            left, right = query
+            l = bisect.bisect_left(cand_idx, left)
+            r = bisect.bisect_right(cand_idx, right)
+            if l == r:
+                ans.append(0)
                 continue
-            i = bisect_left(candles, l)
-            j = bisect_right(candles, r) - 1
-            n = (candles[j]- candles[i] - 1) - (j - i - 1)
-            res.append(max(n, 0))
-        return res
+
+            l_idx = cand_idx[l]
+            
+            r_idx = cand_idx[r-1]
+            cand_count = r - l
+
+            ans.append(r_idx - l_idx + 1 - cand_count)
+            
+        return ans
