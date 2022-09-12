@@ -22,6 +22,7 @@ class Solution(object):
                 left_closest_pipe[i] = i
             else:
                 left_closest_pipe[i] = left_closest_pipe[i - 1]
+ 
         
         right_closest_pipe = [float("inf")] * length
         if s[-1] == '|':
@@ -29,7 +30,7 @@ class Solution(object):
         
         for i in range(length - 2, -1, -1):
             if s[i] == '|':
-                right_closest_pipe[i] = min(right_closest_pipe[i], i)
+                right_closest_pipe[i] = i
             else:
                 right_closest_pipe[i] = right_closest_pipe[i + 1]
         
