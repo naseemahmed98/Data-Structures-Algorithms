@@ -2,7 +2,7 @@ class Solution(object):
     def findCircleNum(self, isConnected):
         graph = defaultdict(list)
         for i in range(len(isConnected)):
-            for j in range(len(isConnected[i])):
+            for j in range(len(isConnected)):
                 if isConnected[i][j]:
                     graph[i].append(j)
         visited = set()
