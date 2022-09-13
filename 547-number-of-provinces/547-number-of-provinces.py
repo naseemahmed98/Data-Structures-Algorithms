@@ -1,22 +1,23 @@
 class Solution(object):
     def findCircleNum(self, isConnected):
-        graph = defaultdict(list)
-        for i in range(len(isConnected)):
-            for j in range(len(isConnected)):
-                if isConnected[i][j] == 1:
-                    graph[i].append(j)
-        visited = set()
+        graph = collections.defaultdict(list)
+        for x in range(len(isConnected)):
+            for y in range(len(isConnected)):
+                if isConnected[x][y] == 1:
+                    graph[x].append(y)
         
         def dfs(node):
             visited.add(node)
-            for neighbor in graph[node]:
-                if neighbor not in visited:
-                    dfs(neighbor)
+            for city in graph[node]:
+                if city not in visited:
+                    dfs(city)
         
-        countOfProvinces = 0
-        for i in range(len(isConnected)):
-            if i not in visited:
-                countOfProvinces += 1
-                dfs(i)
-        return countOfProvinces
+        visited = set()
+        numProvinces = 0 
+        for x in range(len(isConnected)):
+            if x not in visited:
+                numProvinces += 1 
+                dfs(x)
+        
+        return numProvinces
         
