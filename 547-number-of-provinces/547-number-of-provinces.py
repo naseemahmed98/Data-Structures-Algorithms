@@ -8,10 +8,10 @@ class Solution(object):
             q.append(i)
             while q:
                 curCity = q.popleft()
-                for adjacendCity, connected in enumerate(isConnected[curCity]):
-                    if connected == 1 and adjacendCity not in isVisited:
-                        isVisited.add(adjacendCity)
-                        q.append(adjacendCity)
+                for x in range(len(isConnected[curCity])):
+                    if isConnected[curCity][x] == 1 and x not in isVisited:
+                        isVisited.add(x)
+                        q.append(x)
                   
         ans = 0
         for i in range(len(isConnected)):
