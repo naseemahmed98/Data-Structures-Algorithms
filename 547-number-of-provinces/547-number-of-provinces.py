@@ -7,16 +7,16 @@ class Solution(object):
                     graph[i].append(j)
         visited = set()
         
-        def dfs(graph, visited, node):
+        def dfs(node):
             visited.add(node)
             for neighbor in graph[node]:
                 if neighbor not in visited:
-                    dfs(graph, visited, neighbor)
+                    dfs(neighbor)
         
         countOfProvinces = 0
         for i in range(len(isConnected)):
             if i not in visited:
                 countOfProvinces += 1
-                dfs(graph, visited, i)
+                dfs(i)
         return countOfProvinces
         
