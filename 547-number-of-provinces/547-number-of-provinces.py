@@ -9,7 +9,7 @@ class Solution(object):
             while q:
                 curCity = q.popleft()
                 for adjacendCity, connected in enumerate(isConnected[curCity]):
-                    if connected and adjacendCity not in isVisited:
+                    if connected == 1 and adjacendCity not in isVisited:
                         isVisited.add(adjacendCity)
                         q.append(adjacendCity)
                   
