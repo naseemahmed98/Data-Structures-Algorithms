@@ -1,48 +1,36 @@
 class Solution(object):
     def platesBetweenCandles(self, s, queries):
-        length = len(s)
-        prefix_sum = [0] * length
+        numStars = [0] * len(s)
+        if s[0] == "*":
+            numStars[0] = 1 
         
-        if s[0] == '*':
-            prefix_sum[0] = 1    
+        leftArray = [-1] * len(s)
+        if s[0] == "|":
+            leftArray[0] = 0 
         
-        for i in range(1, length):
-            if s[i] == '*':
-                prefix_sum[i] = 1 + prefix_sum[i - 1]
+        for x in range(1,len(s)):
+            if s[x] == "*":
+                numStars[x] = 1 + numStars[x-1]
+                leftArray[x] = leftArray[x-1]
             else:
-                prefix_sum[i] = prefix_sum[i - 1]
-       
-                
-        leftArray = [-2] * length
-        if s[0] == '|':
-            leftArray[0] = 0
+                numStars[x] = numStars[x-1]
+                leftArray[x] = x 
         
-        for i in range(1, length):
-            if s[i] == '|':
-                leftArray[i] = i
+        rightArray = [float("inf")] * len(s)
+        if s[-1] == "|":
+            rightArray[-1] = len(s)-1
+        for x in range(len(s)-2,-1,-1):
+            if s[x] == "|":
+                rightArray[x] = x 
             else:
-                leftArray[i] = leftArray[i - 1]
- 
+                rightArray[x] = rightArray[x+1]
         
-        rightArray = [float("inf")] * length
-        if s[-1] == '|':
-            rightArray[-1] = length - 1
-        
-        for i in range(length - 2, -1, -1):
-            if s[i] == '|':
-                rightArray[i] = i
-            else:
-                rightArray[i] = rightArray[i + 1]
-     
-        
-        answers = []
-        for start, end in queries:
-            leftIndex = rightArray[start]
-            rightIndex = leftArray[end]
+        res = []
+        for x,y in queries:
+            leftIndex, rightIndex = rightArray[x], leftArray[y]
             if rightIndex - leftIndex > 1:
-                num_of_stars = prefix_sum[rightIndex] - prefix_sum[leftIndex]
-                answers.append(num_of_stars)
+                res.append(numStars[rightIndex]-numStars[leftIndex])
             else:
-                answers.append(0)
-        
-        return answers
+                res.append(0)
+        return res            
+            
