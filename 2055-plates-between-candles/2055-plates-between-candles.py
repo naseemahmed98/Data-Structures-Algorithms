@@ -13,34 +13,34 @@ class Solution(object):
                 prefix_sum[i] = prefix_sum[i - 1]
        
                 
-        left_closest_pipe = [-1] * length
+        leftArray = [-2] * length
         if s[0] == '|':
-            left_closest_pipe[0] = 0
+            leftArray[0] = 0
         
         for i in range(1, length):
             if s[i] == '|':
-                left_closest_pipe[i] = i
+                leftArray[i] = i
             else:
-                left_closest_pipe[i] = left_closest_pipe[i - 1]
+                leftArray[i] = leftArray[i - 1]
  
         
-        right_closest_pipe = [float("inf")] * length
+        rightArray = [float("inf")] * length
         if s[-1] == '|':
-            right_closest_pipe[-1] = length - 1
+            rightArray[-1] = length - 1
         
         for i in range(length - 2, -1, -1):
             if s[i] == '|':
-                right_closest_pipe[i] = i
+                rightArray[i] = i
             else:
-                right_closest_pipe[i] = right_closest_pipe[i + 1]
+                rightArray[i] = rightArray[i + 1]
      
         
         answers = []
         for start, end in queries:
-            left_most_pipe_index = right_closest_pipe[start]
-            right_most_pipe_index = left_closest_pipe[end]
-            if right_most_pipe_index - left_most_pipe_index > 1:
-                num_of_stars = prefix_sum[right_most_pipe_index] - prefix_sum[left_most_pipe_index]
+            leftIndex = rightArray[start]
+            rightIndex = leftArray[end]
+            if rightIndex - leftIndex > 1:
+                num_of_stars = prefix_sum[rightIndex] - prefix_sum[leftIndex]
                 answers.append(num_of_stars)
             else:
                 answers.append(0)
