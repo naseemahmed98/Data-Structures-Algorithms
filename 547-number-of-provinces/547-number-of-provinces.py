@@ -3,7 +3,7 @@ class Solution(object):
         graph = defaultdict(list)
         for i in range(len(isConnected)):
             for j in range(len(isConnected)):
-                if isConnected[i][j]:
+                if isConnected[i][j] == 1:
                     graph[i].append(j)
         visited = set()
         
