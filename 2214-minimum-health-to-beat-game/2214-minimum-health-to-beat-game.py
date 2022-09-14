@@ -1,18 +1,21 @@
 class Solution(object):
     def minimumHealth(self, damage, armor):
-        total_health = 1
-        damage.sort(reverse = True)
-        armor_state = True 
+        s = 0
         
-        for x in damage:
-            if armor_state:
-                if x >= armor:
-                    total_health += (x - armor)
-                armor_state = False
-                continue
+        max_value = 0
+        
+        for i in range(len(damage)):
             
-            total_health += x
-            
-        return total_health
+            if damage[i] > max_value:
+                max_value = damage[i]
                 
+            s += damage[i]
             
+        if max_value > armor:
+            rem = max_value - armor
+            s -= max_value 
+            s += rem
+        else:
+            s -= max_value
+        
+        return s + 1
