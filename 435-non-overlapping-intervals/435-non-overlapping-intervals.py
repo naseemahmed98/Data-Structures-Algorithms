@@ -3,11 +3,11 @@ class Solution(object):
         res = 0 
         intervals.sort()
         prevEnd = float("-inf")
+        
         for start, end in intervals:
             if start >= prevEnd:
                 prevEnd = end
             else:
-                res += 1
-                prevEnd = min(end, prevEnd)
+                res += 1 
+                prevEnd = min(prevEnd,end)
         return res
-                
