@@ -18,7 +18,7 @@ class Solution(object):
                 if board[x][y] == 1:
                     if neighborOnes < 2 or neighborOnes > 3:
                         nextState[x][y] = 0
-                    elif 2 <= neighborOnes <=3:
+                    else:
                         nextState[x][y] = 1
                 elif board[x][y] == 0:
                     if neighborOnes == 3:
