@@ -22,9 +22,9 @@ class Solution(object):
                         l += 1
                     else:
                         res.append([nums[l], nums[r], nums[i], nums[j]])
-                        r -= 1
+                        l += 1
                         #checking l duplicates
-                        while l < r and nums[r] == nums[r+1]:
-                            r -= 1
+                        while l < r and nums[l] == nums[l-1]:
+                            l += 1
 
         return res
