@@ -1,33 +1,17 @@
-class Solution(object):
+class Solution:
+    #T=O(m*nlgn),S=O(mn)
+    #m=len(log),n=number of logs
     def reorderLogFiles(self, logs):
-        """
-        :type logs: List[str]
-        :rtype: List[str]
-        """
-        
-        digList, strList = [],[]
-        
-        for x in logs:
-            split = x.split()
-            if split[1].isalpha():
-                strList.append(x)
+        letter = []
+        digit = []
+        for log in logs:
+            if log.split()[1].isdigit():
+                digit.append(log)
             else:
-                digList.append(x)
-       
-        lst = []
-        for x in strList:
-            words = x.split()
-            identifier = words.pop(0)
-            words = (identifier,words)
-            lst.append(words)
-        lst.sort(key = lambda x: (x[1], x[0]))
+                letter.append(log)
         
-        res = []
-        for x in lst:
-            x[1].insert(0,x[0])
-            new = [" ".join(x[1])]
-            res += new
-           
-        res += digList
-        return res 
-    
+		#sort by content and if there is a tie, sort by id: sort by id first and then sort by content as sort is a stable algo
+        letter.sort(key = lambda x: x.split()[0]) #sort by identifier if there is a tie with suffix
+        letter.sort(key = lambda x: x.split()[1:])
+        
+        return letter + digit
