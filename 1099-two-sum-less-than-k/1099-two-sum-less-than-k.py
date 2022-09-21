@@ -1,15 +1,20 @@
-class Solution:
-    def twoSumLessThanK(self, nums: List[int], k: int) -> int:
-        nums.sort()
-        l, r = 0,len(nums)-1 
-        largestPossibleSum = -1
+class Solution(object):
+    def twoSumLessThanK(self, movieTimes, duration):
+        indices = {}
+        for x in range(len(movieTimes)):
+            if movieTimes[x] not in indices:
+                indices[movieTimes[x]] = x
+        movieSum = duration 
+        movieTimes.sort() #60,75,85,90,120,125,150
+        l, r = 0,len(movieTimes)-1 
+        largestPossibleSum = float("-inf")
         while l < r: 
-            mySum = nums[r] + nums[l] 
-            if mySum < k:
-                largestPossibleSum = max(largestPossibleSum,mySum)
-                l += 1 
-            elif mySum >= k:
+            if movieTimes[r] + movieTimes[l] >= movieSum:
                 r -= 1 
-        return largestPossibleSum 
+            if movieTimes[r] + movieTimes[l] < movieSum:
+                if movieTimes[r] + movieTimes[l] > largestPossibleSum:
+                    largestPossibleSum = movieTimes[l] + movieTimes[r]
 
-
+                l += 1 
+        return largestPossibleSum if largestPossibleSum > float("-inf") else -1 
+        
