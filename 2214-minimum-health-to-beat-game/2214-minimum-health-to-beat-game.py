@@ -1,20 +1,4 @@
 class Solution(object):
     def minimumHealth(self, damage, armor):
-        totalHealth = 1
-        maxDamage = float("-inf")
-        for x in damage:
-            if x > maxDamage:
-                maxDamage = x 
-        
-        armorAccess = True 
-        for x in damage:
-            if x == maxDamage and armorAccess:
-                if x > armor:
-                    totalHealth += (x-armor)
-                armorAccess = False 
-                continue 
-            totalHealth += x 
-        
-        return totalHealth
-                
+        return sum(damage)-armor+1 if max(damage)>armor else sum(damage)-max(damage)+1    
             
