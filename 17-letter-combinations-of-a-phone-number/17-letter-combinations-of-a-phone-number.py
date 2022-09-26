@@ -7,7 +7,7 @@ class Solution:
         if not digits:
             return []
         def solve(i,combo):
-            if i>=len(digits):
+            if i==len(digits):
                 res.append("".join(combo))
                 return
             temp=letter[digits[i]]
