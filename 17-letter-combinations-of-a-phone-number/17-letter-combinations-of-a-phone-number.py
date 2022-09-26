@@ -1,22 +1,20 @@
-class Solution(object):
-    def letterCombinations(self, digits):
-        letterHashMap = {'2':['a','b','c'],'3':['d','e','f'],'4':['g','h','i'],'5':['j','k','l'],'6':['m','n','o'],'7':['p','q','r','s'],'8':['t','u','v'],'9':['w','x','y','z']}
+class Solution:
+    def letterCombinations(self, A):
+        letter = {"2":"abc","3":"def","4":"ghi","5":"jkl","6":"mno","7":"pqrs","8":"tuv","9":"wxyz"}
+        i=0
+        STR=[]
+        ans=[]
         
-        if not digits:
-            return []
-       
-        res = []
-        def dfs(number,index,string):
-            if index == len(digits)-1:
-                for x in (letterHashMap[number]):
-                    combo = string + x 
-                    res.append(combo)
+        def solve(A,i,STR,ans):
+            if i>=len(A):
+                ans.append("".join(STR))
                 return
-            for x in letterHashMap[number]:
-                combo = string + x 
-                if index < len(digits)-1:
-                    dfs(digits[index+1],index+1,combo)
-              
-
-        dfs(digits[0],0,'')
-        return res 
+            temp=letter[A[i]]
+            for k in temp:
+                STR.append(k)
+                solve(A,i+1,STR,ans)
+                STR.pop()
+            
+            return ans
+        
+        return solve(A,i,STR,ans)
