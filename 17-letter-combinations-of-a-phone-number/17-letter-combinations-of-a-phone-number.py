@@ -6,14 +6,16 @@ class Solution(object):
             return []
        
         res = []
-        def dfs(index,string):
+        def dfs(index,lst):
             if index == len(digits):
+                string = ''.join(lst)
                 res.append(string)
                 return
             for x in letterHashMap[digits[index]]:
-                combo = string + x 
-                dfs(index+1,combo)
+                lst.append(x)
+                dfs(index+1,lst)
+                lst.pop()
               
 
-        dfs(0,'')
+        dfs(0,[])
         return res 
