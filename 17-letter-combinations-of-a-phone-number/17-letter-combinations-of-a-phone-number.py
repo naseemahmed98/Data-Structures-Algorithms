@@ -1,20 +1,22 @@
 class Solution:
-    def letterCombinations(self, A):
+    def letterCombinations(self, digits):
         letter = {"2":"abc","3":"def","4":"ghi","5":"jkl","6":"mno","7":"pqrs","8":"tuv","9":"wxyz"}
         i=0
-        STR=[]
-        ans=[]
-        
-        def solve(A,i,STR,ans):
-            if i>=len(A):
-                ans.append("".join(STR))
+        combo=[]
+        res=[]
+        if not digits:
+            return []
+        def solve(i,combo):
+            if i>=len(digits):
+                res.append("".join(combo))
                 return
-            temp=letter[A[i]]
+            temp=letter[digits[i]]
             for k in temp:
-                STR.append(k)
-                solve(A,i+1,STR,ans)
-                STR.pop()
+                combo.append(k)
+                solve(i+1,combo)
+                combo.pop()
             
-            return ans
+    
         
-        return solve(A,i,STR,ans)
+        solve(i,combo)
+        return res
