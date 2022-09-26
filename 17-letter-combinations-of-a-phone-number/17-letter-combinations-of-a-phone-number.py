@@ -10,8 +10,7 @@ class Solution:
             if i==len(digits):
                 res.append("".join(combo))
                 return
-            temp=letter[digits[i]]
-            for k in temp:
+            for k in letter[digits[i]]:
                 combo.append(k)
                 solve(i+1,combo)
                 combo.pop()
