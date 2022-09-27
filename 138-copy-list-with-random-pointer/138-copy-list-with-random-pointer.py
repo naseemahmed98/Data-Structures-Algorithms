@@ -10,27 +10,21 @@ class Node:
 class Solution(object):
     def copyRandomList(self, head):
         if not head:
-            return head
+            return 
         
-        cur = head
-        m = {}
-        m[head] = Node(head.val)
-        iteration = 0 
+        curr = head 
+        hashMap = {}
+        hashMap[curr] = Node(curr.val)
+        while curr:
+            if curr.next and curr.next not in hashMap:
+                hashMap[curr.next] = Node(curr.next.val)
+            if curr.random and curr.random not in hashMap:
+                hashMap[curr.random] = Node(curr.random.val)
+            hashMap[curr].next = hashMap[curr.next] if curr.next else None
+            hashMap[curr].random = hashMap[curr.random] if curr.random else None 
+            curr = curr.next
         
-        while cur:
-        
+        return hashMap[head]
             
-            if cur.next and cur.next not in m:
-                #print('dos',iteration)
-                m[cur.next] = Node(cur.next.val)
             
-            if cur.random and cur.random not in m:
-                #print('tres',iteration)
-                m[cur.random] = Node(cur.random.val)
-
-            m[cur].next = m[cur.next] if cur.next in m else None
-            m[cur].random = m[cur.random] if cur.random in m else None
-			
-            cur = cur.next
-            iteration += 1 
-        return m[head]
+        
