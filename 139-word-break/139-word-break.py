@@ -1,12 +1,17 @@
 class Solution(object):
     def wordBreak(self, s, wordDict):
-        dp = [False] * (len(s) + 1 )
-        dp[len(s)] = True
-        for x in range(len(s)-1, -1, -1):
-            for z in wordDict:
-                if x + len(z) <= len(s):
-                    if s[x:x+len(z)] == z:
-                        dp[x] = dp[x+len(z)]
-                if dp[x]:
-                    break
-        return dp[0]
+        memory = {}
+        def makeWord(string):
+            if not string:
+                return True
+            if string in memory:
+                return memory[string]
+            for word in wordDict:
+                ind = string.find(word)
+                if ind == 0:
+                    res = makeWord(string[len(word):])
+                    memory[string[len(word):]] = res
+                    if res:
+                        return True
+            return False
+        return makeWord(s)
