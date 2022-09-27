@@ -1,19 +1,12 @@
 class Solution(object):
     def wordBreak(self, s, wordDict):
-        s_len = len(s)
-        
-        # initialize the DP talbe. 
-        dp = [False] * (s_len + 1)
-        # start from empty string as the seed. 
-        dp[0] = True
-        
-    
-        for i in range(s_len):
-            if dp[i]:
-                for w in wordDict:
-                   
-                    if s[i:i + len(w)] == w and i + len(w):
-                        dp[i + len(w)] = True
-        
-        # our result is the dp[s_len]
-        return dp[-1]
+        dp = [False] * (len(s) + 1 )
+        dp[len(s)] = True
+        for x in range(len(s)-1, -1, -1):
+            for z in wordDict:
+                if x + len(z) <= len(s):
+                    if s[x:x+len(z)] == z:
+                        dp[x] = dp[x+len(z)]
+                if dp[x]:
+                    break
+        return dp[0]
