@@ -11,7 +11,8 @@ class Solution(object):
         for i in range(s_len):
             if dp[i]:
                 for w in wordDict:
-                    if s[i:i + len(w)] == w and i + len(w) <= s_len:
+                    print(i)
+                    if i + len(w) <= s_len and s[i:i + len(w)] == w:
                         dp[i + len(w)] = True
         
         # our result is the dp[s_len]
