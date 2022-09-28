@@ -2,8 +2,7 @@ class Solution(object):
     def groupAnagrams(self, strs):
         dct = collections.defaultdict(list)
         for x in strs:
-            sorted_word = "".join(sorted(x))
-            
-            dct[sorted_word].append(x)
-          
+            sortedWord = ''.join(sorted(x))
+            dct[sortedWord].append(x)
         return dct.values()
+      
