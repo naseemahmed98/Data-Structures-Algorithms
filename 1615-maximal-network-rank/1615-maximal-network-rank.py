@@ -6,7 +6,7 @@ class Solution:
             hashmap[y].add(x)
         
         res = 0
-        for i in range(n):
+        for i in range(n-1):
             for j in range(i+1,n):
                 totalNetwork = len(hashmap[i]) + len(hashmap[j])
                 if i in hashmap[j]:
