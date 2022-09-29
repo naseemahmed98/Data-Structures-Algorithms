@@ -1,32 +1,27 @@
 class Solution(object):
     def canFinish(self, numCourses, prerequisites):
-        preMap = collections.defaultdict(list)
-        for crs,pre in prerequisites:
-            preMap[crs].append(pre)
         
-        res, visited = [], set()
+        preReqs = collections.defaultdict(list)
+        for x,y in prerequisites:
+            preReqs[x].append(y)
         
-        def dfs(crs):
-            if crs in visited:
+        memo = {}
+        def dfs(course,visited):
+            if course in memo:
+                return memo[course]
+            if course in visited:
                 return False
-            
-            if not preMap[crs]:
+            if not preReqs[course]:
                 return True
-            
-            visited.add(crs)
-            for pre in preMap[crs]:
-                if not dfs(pre):
+            visited.add(course)
+            for x in preReqs[course]:
+                if not dfs(x,visited):
                     return False
-            
-            preMap[crs] = []
-            visited.remove(crs)
+            memo[course] = True
             return True
         
         
         for x in range(numCourses):
-            if not dfs(x):
+            if not dfs(x,set()):
                 return False
-        
         return True
-        
-        
