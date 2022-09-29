@@ -17,11 +17,13 @@ class Solution(object):
             for x in preReqs[course]:
                 if not dfs(x,visited):
                     return False
+            visited.remove(course)
             memo[course] = True
             return True
         
         
         for x in range(numCourses):
             if not dfs(x,set()):
+                print(x)
                 return False
         return True
