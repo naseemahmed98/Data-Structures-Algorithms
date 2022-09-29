@@ -8,9 +8,9 @@ class Solution(object):
         for i in range(len(searchWord)):
             temp = []
             
-            for product in products:
-                if i < len(product) and product[i] == searchWord[i]:
-                    temp.append(product)
+            for x in products:
+                if i < len(x) and x[i] == searchWord[i]:
+                    temp.append(x)
                     
             res.append(temp[:3])
             products = temp
