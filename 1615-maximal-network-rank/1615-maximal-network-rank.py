@@ -9,7 +9,7 @@ class Solution:
         for i in range(n):
             for j in range(i+1,n):
                 totalNetwork = len(hashmap[i]) + len(hashmap[j])
-                if j in hashmap[i]:
+                if i in hashmap[j]:
                     res=max(res,totalNetwork-1)
                 else:
                     res=max(res,totalNetwork)
