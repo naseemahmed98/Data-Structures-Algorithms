@@ -4,7 +4,7 @@ class Solution(object): #BFS
         prereq_list = []
         for x in range(numCourses):
             prereq_list.append([])
-        no_prereqs = []
+        no_prereqs = deque()
         
         for b,a in prerequisites:
             num_pre[b] += 1 
@@ -16,7 +16,7 @@ class Solution(object): #BFS
         
         counter = 0 
         while no_prereqs:
-            course = no_prereqs.pop(0)
+            course = no_prereqs.popleft()
             counter += 1 
             for x in prereq_list[course]:
                 num_pre[x] -= 1 
