@@ -1,38 +1,21 @@
 class Solution:
     def findAllRecipes(self, recipes,ingredients,supplies):
-        graph = collections.defaultdict()
-        for x,y in zip(recipes,ingredients):
-            graph[x] = y 
-        supplySet, recipeSet = set(supplies), set(recipes)
+        adj=defaultdict(list)
+        ind=defaultdict(int)
         
-        res = []
-        completeFoods = set()
-        visited = set()
-        def dfs(food):
-        
-            if food in supplySet or food in completeFoods:
-                return True
-            if food in visited or (food not in supplySet and food not in recipeSet):
-                return False  
-            
-            visited.add(food)
-            temp = True
-            for x in graph[food]:
-                if not dfs(x):
-                    print(x)
-                    temp = False
-                    break 
-            if temp:
-                res.append(food)
-                completeFoods.add(food)
-                return True
-            else:
-                return False
-        
-        for x in recipes:
-            dfs(x)
-      
-        return res 
-        
-
-        
+        for i in range(len(ingredients)):
+            for j in range(len(ingredients[i])):
+                adj[ingredients[i][j]].append(recipes[i])
+                ind[recipes[i]]+=1
+        ans=[]
+        q=deque()
+        for i in range(len(supplies)):
+            q.append(supplies[i])
+        while q:
+            node=q.popleft()
+            for i in adj[node]:
+                ind[i]-=1
+                if ind[i]==0:
+                    q.append(i)
+                    ans.append(i)
+        return ans
