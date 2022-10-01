@@ -4,14 +4,15 @@ class Solution(object):
         for u, v, w in times:
             graph[u].append((w, v)) # u --> v
         
-        INF = float('inf')
-        dist = {node: INF for node in range(1, N+1)}
+        nodeTimes = {}
+        
         
         def dfs(node, elasped):
-            if dist[node] <= elasped: return
-            dist[node] = elasped
+            if node in nodeTimes and nodeTimes[node] <= elasped: 
+                return
+            nodeTimes[node] = elasped
             for time, nei in sorted(graph[node]):
                 dfs(nei, time+elasped)
         dfs(K, 0)
-        ans = max(dist.values())
-        return ans if ans < INF else -1
+        ans = max(nodeTimes.values())
+        return ans if len(nodeTimes) == N else -1
