@@ -1,20 +1,17 @@
 class Solution(object):
-    def networkDelayTime(self, times, n, k):
+     def networkDelayTime(self, times, N, K):
         graph = collections.defaultdict(list)
-        for x,y,z in times:
-            graph[x].append((y,z))
+        for u, v, w in times:
+            graph[u].append((w, v)) # u --> v
         
+        INF = float('inf')
+        dist = {node: INF for node in range(1, N+1)}
         
-        nodeTimes = {k:0}
-        
-        q = collections.deque()
-        q.append((k,0))
-        
-        while q:
-            node, totalTime = q.pop()
-            for nextNode, timeAddition in graph[node]:
-                if nextNode not in nodeTimes or nodeTimes[nextNode] > totalTime + timeAddition:
-                    nodeTimes[nextNode] = totalTime + timeAddition
-                    q.append((nextNode,nodeTimes[nextNode]))
-        
-        return max(nodeTimes.values()) if len(nodeTimes) == n else -1
+        def dfs(node, elasped):
+            if dist[node] <= elasped: return
+            dist[node] = elasped
+            for time, nei in sorted(graph[node]):
+                dfs(nei, time+elasped)
+        dfs(K, 0)
+        ans = max(dist.values())
+        return ans if ans < INF else -1
