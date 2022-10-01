@@ -1,22 +1,20 @@
 class Solution(object):
     def networkDelayTime(self, times, n, k):
-        
-        networkMapping = collections.defaultdict(list)
-        
+        graph = collections.defaultdict(list)
         for x,y,z in times:
-            networkMapping[x].append((y,z)) 
-
-        signalTimes = {k:0}
-        queue = deque([(k,0)])
+            graph[x].append((y,z))
         
         
-        while queue:
-            node,time = queue.popleft()
-            for nextNode, nextNodeTime in networkMapping[node]:
-                if nextNode == k: 
-                    continue
-                if (nextNode not in signalTimes) or (time + nextNodeTime < signalTimes[nextNode]):
-                    signalTimes[nextNode] = time + nextNodeTime
-                    queue.append((nextNode,signalTimes[nextNode]))
-       
-        return max(list(signalTimes.values())) if len(signalTimes) == n else -1
+        nodeTimes = {k:0}
+        
+        q = collections.deque()
+        q.append((k,0))
+        
+        while q:
+            node, totalTime = q.pop()
+            for nextNode, timeAddition in graph[node]:
+                if nextNode not in nodeTimes or nodeTimes[nextNode] > totalTime + timeAddition:
+                    nodeTimes[nextNode] = totalTime + timeAddition
+                    q.append((nextNode,nodeTimes[nextNode]))
+        
+        return max(nodeTimes.values()) if len(nodeTimes) == n else -1
