@@ -1,21 +1,24 @@
 class Solution:
     def findAllRecipes(self, recipes,ingredients,supplies):
-        adj=defaultdict(list)
-        ind=defaultdict(int)
+        graph = collections.defaultdict(list)
+        numIng = collections.defaultdict(int)
         
-        for i in range(len(ingredients)):
-            for j in range(len(ingredients[i])):
-                adj[ingredients[i][j]].append(recipes[i])
-                ind[recipes[i]]+=1
-        ans=[]
-        q=deque()
-        for i in range(len(supplies)):
-            q.append(supplies[i])
-        while q:
-            node=q.popleft()
-            for i in adj[node]:
-                ind[i]-=1
-                if ind[i]==0:
-                    q.append(i)
-                    ans.append(i)
-        return ans
+        for x in range(len(ingredients)):
+            for y in range(len(ingredients[x])):
+                numIng[recipes[x]] += 1 
+                graph[ingredients[x][y]].append(recipes[x])
+        
+        queue = collections.deque()
+        for x in supplies:
+            queue.append(x)
+        
+        res = []
+        while queue: 
+            node = queue.popleft()
+            for x in graph[node]:
+                numIng[x] -= 1 
+                if not numIng[x]:
+                    res.append(x)
+                    queue.append(x)
+        return res
+            
