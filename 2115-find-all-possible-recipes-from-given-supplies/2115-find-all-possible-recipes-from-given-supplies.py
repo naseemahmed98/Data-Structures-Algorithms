@@ -3,23 +3,23 @@ class Solution:
         graph = collections.defaultdict()
         for x,y in zip(recipes,ingredients):
             graph[x] = y 
-        suppliesSet, recipesSet = set(supplies), set(recipes)
+        supplySet, recipeSet = set(supplies), set(recipes)
         
         res = []
         completeFoods = set()
         visited = set()
         def dfs(food):
-            
-            if food in supplies or food in completeFoods:
+        
+            if food in supplySet or food in completeFoods:
                 return True
-            if food in visited or (food not in suppliesSet and food not in recipesSet):
-                return False
+            if food in visited or (food not in supplySet and food not in recipeSet):
+                return False  
             
-             
             visited.add(food)
             temp = True
             for x in graph[food]:
                 if not dfs(x):
+                    print(x)
                     temp = False
                     break 
             if temp:
