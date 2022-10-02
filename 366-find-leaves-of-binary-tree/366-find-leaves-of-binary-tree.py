@@ -6,8 +6,7 @@
 #         self.right = right
 class Solution(object):
     def findLeaves(self, root):
-        if not root.left and not root.right:
-            return [[root.val]]
+      
         res = []
         def iterate(node):
             if not node.left and not node.right:
