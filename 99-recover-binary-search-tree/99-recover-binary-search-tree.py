@@ -14,7 +14,7 @@ class Solution(object):
             inorder(node.left)
             if not self.switch_one and node.val < self.previous_node.val:
                 self.switch_one = self.previous_node
-            if self.switch_one and node.val < self.previous_node.val:
+            if node.val < self.previous_node.val:
                 self.switch_two = node
             self.previous_node = node 
             inorder(node.right)
