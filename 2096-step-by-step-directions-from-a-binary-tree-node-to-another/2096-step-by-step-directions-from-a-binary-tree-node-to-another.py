@@ -11,7 +11,6 @@ class Solution(object):
                 directions.appendleft("L")
                 return True
             if findTarget(node.right,value,directions):
-                print(node.val)
                 directions.appendleft("R")
                 return True
        
