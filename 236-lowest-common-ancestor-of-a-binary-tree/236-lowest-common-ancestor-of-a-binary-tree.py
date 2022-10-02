@@ -7,17 +7,20 @@
 
 class Solution(object):
     def lowestCommonAncestor(self, root, p, q):
+        
         self.res = None
-        def dfs(node):
+        
+        def iterate(node):
             if not node:
                 return False
-            left = dfs(node.left)
-            right = dfs(node.right)
-            curr = (node == p) or (node == q)
-            if (left and curr) or (left and right) or (right and curr):
-                self.res = node 
-                #return True
-            return left or right or curr 
+            left = iterate(node.left)
+            right = iterate(node.right)
+            curr = (node.val == p.val) or (node.val == q.val)
+            if (left and right) or (left and curr) or (right and curr):
+                self.res = node
+
+            return curr or left or right
         
-        dfs(root)
+        iterate(root)
         return self.res
+            
