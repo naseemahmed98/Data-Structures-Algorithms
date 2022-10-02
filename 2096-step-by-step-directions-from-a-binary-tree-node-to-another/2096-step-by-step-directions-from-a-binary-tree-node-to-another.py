@@ -1,24 +1,28 @@
 class Solution(object):
     def getDirections(self, root, startValue, destValue):
-        startPath, destPath = deque(), deque()
         
-        def findTarget(node,val,path):
+        startDirections, destDirections = deque(),deque()
+        def findTarget(node, value, directions):
             if not node:
-                return 
-            if node.val == val:
-                return True 
-            if findTarget(node.left,val,path):
-                path.appendleft("L")
-                return True 
-            if findTarget(node.right,val,path):
-                path.appendleft("R")
-                return True 
+                return False
+            if node.val == value:
+                return True
+            if findTarget(node.left,value,directions):
+                directions.appendleft("L")
+                return True
+            if findTarget(node.right,value,directions):
+                print(node.val)
+                directions.appendleft("R")
+                return True
+       
+    
+        findTarget(root,startValue,startDirections)
+        findTarget(root,destValue,destDirections)
         
-        findTarget(root,startValue, startPath)
-        findTarget(root,destValue, destPath)
+        while startDirections and destDirections and startDirections[0] == destDirections[0]:
+            startDirections.popleft()
+            destDirections.popleft()
         
-        while startPath and destPath and startPath[0] == destPath[0]:
-            startPath.popleft()
-            destPath.popleft()
-        
-        return "U" * len(startPath) + "".join(destPath)
+        return "U" * len(startDirections) + ''.join(destDirections)
+            
+            
