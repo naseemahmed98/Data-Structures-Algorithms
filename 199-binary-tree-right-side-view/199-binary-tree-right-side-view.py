@@ -8,27 +8,29 @@ class Solution(object):
     def rightSideView(self, root):
         if not root:
             return 
-        levels = []
-        queue = [root]
-        res = []
-        def bfs(queue):
-            if not queue:
-                return 
+        
+        res = [[root]]
+        def levelTraversal(q):
+            if not q:
+                return
             lst = []
-            for x in range(len(queue)):
-                lst.append(queue[0].val)
-                if queue[0].left:
-                    queue.append(queue[0].left)
-                if queue[0].right:
-                    queue.append(queue[0].right)  
-                queue.pop(0)
-            levels.append(lst)
-            bfs(queue)
-            #return levels
+            while q:
+                node = q.popleft()
+                if node.left:
+                    lst.append(node.left)
+                if node.right:
+                    lst.append(node.right)
+            if lst:
+                res.append(lst)
+            levelTraversal(deque(lst))
+            
+                
+        
     
-        bfs(queue)
-        for x in range(len(levels)):
-            res.append(levels[x][-1])
+        levelTraversal(deque([root]))
+    
+        for x in range(len(res)):
+            res[x] = res[x][-1].val
+        
         return res
-     
-      
+               
