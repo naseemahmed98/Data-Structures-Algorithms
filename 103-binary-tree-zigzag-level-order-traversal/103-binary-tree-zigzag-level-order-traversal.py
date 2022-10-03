@@ -8,32 +8,33 @@ class Solution(object):
     def zigzagLevelOrder(self, root):
         if not root:
             return 
-        res = []
-        queue = [root]
-        
-        def bfs(queue, level):
-            if not queue:
+        res = deque()
+        res.append([root.val])
+        def zigzag(q,k):
+            if not q:
                 return 
-            vals = []
-            queue.reverse()
-            for x in range(len(queue)):
-                vals.append(queue[0].val)
-                if level % 2 == 1:
-                    if queue[0].right:
-                        queue.append(queue[0].right)
-                    if queue[0].left:
-                        queue.append(queue[0].left)
-                elif level % 2 == 0:
-                    if queue[0].left:
-                        queue.append(queue[0].left)
-                    if queue[0].right:
-                        queue.append(queue[0].right)
-                queue.pop(0)
-            res.append(vals)
-            bfs(queue,level+1)
-            
-            
-        bfs(queue,0)
-        return res
+            lst,newQ = deque(),deque()
+            while q:
+                node = q.popleft()
+                if k % 2 == 0:
+                    if node.right:
+                        lst.append(node.right.val)
+                        newQ.appendleft(node.right)  
+                    if node.left:
+                        lst.append(node.left.val) 
+                        newQ.appendleft(node.left)
+                else:
+                    if node.left:
+                        lst.append(node.left.val) 
+                        newQ.appendleft(node.left)
+                    if node.right:   
+                        lst.append(node.right.val) 
+                        newQ.appendleft(node.right)
+            if lst:
+                res.append(lst)
+            zigzag(newQ, k+1)
+
+                
         
-        
+        zigzag(deque([root]),0)
+        return res           
