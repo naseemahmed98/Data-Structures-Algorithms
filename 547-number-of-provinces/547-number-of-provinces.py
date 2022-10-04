@@ -7,18 +7,22 @@ class Solution(object):
                 if x != y and isConnected[x][y] == 1:
                     adjList[x].append(y)
         
-        def dfs(x):
-            visited.add(x)
-            for y in adjList[x]:
-                if y not in visited:
-                    dfs(y)
+        def bfs(x):
+            q.append(x)
+            while q:
+                node = q.popleft()
+                for y in adjList[node]:
+                    if y not in visited:
+                        q.append(y)
+                        visited.add(y)
         
         
         visited = set()
+        q = deque()
         numProvinces = 0 
         for x in range(length):
             if x not in visited:
-                dfs(x)
+                bfs(x)
                 numProvinces += 1
         
         return numProvinces
