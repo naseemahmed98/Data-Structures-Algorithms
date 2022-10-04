@@ -10,11 +10,13 @@ class Solution(object):
         def bfs(x):
             q.append(x)
             while q:
+               
                 node = q.popleft()
+                visited.add(node)
                 for y in adjList[node]:
                     if y not in visited:
                         q.append(y)
-                        visited.add(y)
+                        
         
         
         visited = set()
