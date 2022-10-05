@@ -4,7 +4,10 @@ class Solution(object):
         res = 0 
         for x in range(len(s)):
             if x < len(s)-1 and romanValues[s[x]] < romanValues[s[x+1]]:
-                res -= romanValues[s[x]] 
+                res -= romanValues[s[x]]
             else:
                 res += romanValues[s[x]]
+        
         return res
+                
+                
