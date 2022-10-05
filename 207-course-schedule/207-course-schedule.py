@@ -18,7 +18,7 @@ class Solution(object):
             for x in preReqs[course]:
                 if not dfs(x):
                     return False
-            
+            visited.remove(course)
             memo[course] = True
             return True
         
