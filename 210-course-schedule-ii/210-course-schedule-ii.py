@@ -1,31 +1,35 @@
 class Solution(object):
     def findOrder(self, numCourses, prerequisites):
-        preMap = collections.defaultdict(list)
-        for crs, pre in prerequisites:
-            preMap[crs].append(pre)
-        cycle = set()
-        res = []
-        memo = {}
-        def dfs(pre):
-            if pre in cycle:
-                return False
-            if pre in memo:
-                return memo[pre]
-            cycle.add(pre)
-            for crs in preMap[pre]:
-                if not dfs(crs):
-                    return False
-            cycle.remove(pre)
-            memo[pre] = True
-            res.append(pre)
-            return True 
         
-        for crs in range(numCourses):
-            if not dfs(crs):
-                return []
-        return res
+        graph = defaultdict(list)
+        
+        for x,y in prerequisites:
+            graph[x].append(y)
+        
+        memo, visited = {},set()
+        
+        def dfs(crs):
+            if crs in visited:
+                return False 
+            if crs in memo:
+                return memo[crs]
+            visited.add(crs)
+            for x in graph[crs]:
+                if not dfs(x):
+                    return False
+            visited.remove(crs)
+            res.append(crs)
+            memo[crs] = True
+            return True
+        
         
 
+        res = []
+        for x in range(numCourses):
+            if not dfs(x):
+                return []
+        
+        return res
         
         
         
