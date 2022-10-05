@@ -12,8 +12,7 @@ class Solution(object):
                 return memo[course]
             if course in visited:
                 return False
-            if not preReqs[course]:
-                return True
+      
             visited.add(course)
             for x in preReqs[course]:
                 if not dfs(x):
