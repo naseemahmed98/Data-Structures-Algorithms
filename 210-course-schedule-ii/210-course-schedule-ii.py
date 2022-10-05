@@ -9,15 +9,16 @@ class Solution(object):
         memo, visited = {},set()
         
         def dfs(crs):
-            if crs in visited:
-                return False 
             if crs in memo:
                 return memo[crs]
+            if crs in visited:
+                return False 
+            
             visited.add(crs)
             for x in graph[crs]:
                 if not dfs(x):
                     return False
-            visited.remove(crs)
+            #visited.remove(crs)
             res.append(crs)
             memo[crs] = True
             return True
