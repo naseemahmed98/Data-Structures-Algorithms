@@ -1,18 +1,13 @@
 class Solution(object):
     def combinationSum(self, candidates, target):
-        res= []
-
+        dp = [[] for x in range(target+1)]
         
-        def backTrack(i,curr,total):
-            if total == target:
-                res.append(curr[:])
-                return
-            if i == len(candidates) or total > target:
-                return
-            curr.append(candidates[i])
-            backTrack(i,curr,total+candidates[i])
-            curr.pop()
-            backTrack(i+1,curr,total)
+        for x in candidates:
+            if x <= target:
+                dp[x].append([x])
+            for y in range(x+1,target+1):
+                for z in dp[y-x]:
+                    dp[y].append(z + [x])
         
-        backTrack(0,[],0)
-        return res
+        return dp[-1]
+        
