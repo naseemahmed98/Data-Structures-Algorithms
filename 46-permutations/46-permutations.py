@@ -1,7 +1,7 @@
 class Solution(object):
     def permute(self, nums):
         def helper(ind,nums):
-            if ind>=len(nums):
+            if ind==len(nums):
                 res.append(nums[:])
                 return
             for i in range(ind,len(nums)):
