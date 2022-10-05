@@ -10,6 +10,8 @@ class Solution(object):
                 numSymbols = num // integer
                 lst.append(roman*numSymbols)
                 num = num % integer
+            if not num:
+                break
         
         res = ''.join(lst)
         return res
