@@ -1,25 +1,23 @@
 class Solution:
     def subArrayRanges(self, nums):
-        minsum = maxsum = 0
-        stack = []
-        for x in range(len(nums)+1):
-            while stack and (x == len(nums) or nums[stack[-1]] > nums[x]):
-                i = stack.pop()
-                if stack:
-                    prev_smaller = stack[-1]
-                else:
-                    prev_smaller = -1
-                minsum += nums[i] * (x - i) * (i - prev_smaller)
-            stack.append(x)
-        stack = []
-        for x in range(len(nums) + 1):
-            while stack and (x == len(nums) or nums[stack[-1]] < nums[x]):
-                i = stack.pop()
-                if stack:
-                    prev_larger = stack[-1]  
-                else:
-                    prev_larger = -1
-                maxsum += nums[i] * (x - i) * (i - prev_larger)
-            stack.append(x)
         
-        return maxsum - minsum
+        total = 0
+        left = 0
+        right = 1
+        mx = nums[left]
+        mn = nums[left]
+        
+        while right < len(nums):            
+            mx = max(mx, nums[right])
+            mn = min(mn, nums[right])
+            total +=  mx - mn
+            
+            if right == len(nums) - 1:
+                left += 1
+                right = left + 1
+                mx = nums[left]
+                mn = nums[left]
+            else:
+                right += 1
+            
+        return total
