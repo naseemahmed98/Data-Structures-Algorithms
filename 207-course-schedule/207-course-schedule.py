@@ -5,8 +5,9 @@ class Solution(object):
         for x,y in prerequisites:
             preReqs[x].append(y)
         
+        visited = set()
         memo = {}
-        def dfs(course,visited):
+        def dfs(course):
             if course in memo:
                 return memo[course]
             if course in visited:
@@ -15,15 +16,15 @@ class Solution(object):
                 return True
             visited.add(course)
             for x in preReqs[course]:
-                if not dfs(x,visited):
+                if not dfs(x):
                     return False
-            #visited.remove(course)
+            
             memo[course] = True
             return True
         
         
         for x in range(numCourses):
-            if not dfs(x,set()):
+            if not dfs(x):
                 print(x)
                 return False
         return True
