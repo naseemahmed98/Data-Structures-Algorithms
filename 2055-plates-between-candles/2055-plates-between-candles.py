@@ -4,16 +4,17 @@ class Solution(object):
         for x in range(len(s)):
             if s[x] == "|":
                 candles.append(x)
-        print(candles)
+        
+        
         res = []
         for x,y in queries:
-            leftIndex = bisect.bisect_left(candles,x)
-            rightIndex = bisect.bisect_right(candles,y)
+            l, r = bisect.bisect_left(candles,x),bisect.bisect_right(candles,y)
             
-            if rightIndex - leftIndex <= 1:
+            if r - l <= 1:
                 res.append(0)
+            
             else:
-                res.append(candles[rightIndex-1] - candles[leftIndex] + 1 - (rightIndex-leftIndex))
+                res.append((candles[r-1]-candles[l]+1) - (r-l))
+        
         return res
             
-                
