@@ -1,3 +1,5 @@
+from collections import Counter
+
 class Solution(object):
     def findPairs(self, nums, k):
         """
@@ -5,18 +7,16 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
-        pairs = set()
-        res = 0 
-        differences = {}
-        for x in nums:  
-            if -1 * (k-x) in differences and (x,-1 * (k-x)) not in pairs:
-                res +=1 
-                pairs.add((x,-1*(k-x)))
-                pairs.add((-1*(k-x),x))
-            if (k + x) in differences and (x,k+x) not in pairs:
-                res += 1 
-                pairs.add((x,k+x))
-                pairs.add((k+x,x))
-            differences[x] = 1
-        return res 
         
+
+
+        result = 0
+
+        counter = Counter(nums)
+
+        for x in counter:
+            if k > 0 and x + k in counter:
+                result += 1
+            elif k == 0 and counter[x] > 1:
+                result += 1
+        return result
